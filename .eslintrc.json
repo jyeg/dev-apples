@@ -1,0 +1,34 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "next/typescript",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "plugin:jest/recommended"
+  ],
+  "ignorePatterns": ["src/components/ui/**/*"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off"
+  },
+  "overrides": [
+    {
+      "files": ["src/**/*.ts", "src/**/*.tsx"],
+      "rules": {
+        "no-unused-vars": "off"
+      }
+    }
+  ],
+  "env": {
+    "jest": true
+  },
+  "plugins": [
+    "jest"
+  ]
+}

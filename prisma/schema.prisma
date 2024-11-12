@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id                String   @id @default(uuid())
+  projectCode      String   @unique
+  projectDescription String
+  productLine      String   // Adjust this based on your actual ProductLine type
+  isSubscribed      Boolean  @default(false)
+  allNotifications  Boolean  @default(false)
+  dailyDigest       Boolean?
+  weeklyDigest      Boolean?
+  createdAt         DateTime @default(now())
+}
