@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 const randomProjectCode = () => {
   const randomLetter = () =>
     String.fromCharCode(0 | (Math.random() * 26 + 97)).toUpperCase();

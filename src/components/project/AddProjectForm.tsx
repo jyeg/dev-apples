@@ -51,7 +51,7 @@ const AddProjectForm = () => {
     defaultValues: {
       projectCode: '',
       projectDescription: '',
-      productLine: undefined,
+      productLine: undefined, // rhf expects specific default values for select fields placeholder to display...pretty annoying honestly.
       wantNotifications: false,
       notificationPreferences: {
         allNotifications: false,
@@ -140,7 +140,7 @@ const AddProjectForm = () => {
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
-                  // @ts-ignore
+                  // @ts-expect-error - react rc and reacthookform cause some console warnings with nextjs
                   suppressHydrationWarning
                   {...field}
                 >

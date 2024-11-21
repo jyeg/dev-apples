@@ -11,10 +11,58 @@ model Project {
   id                String   @id @default(uuid())
   projectCode      String   @unique
   projectDescription String
-  productLine      String   // Adjust this based on your actual ProductLine type
+  productLine      String
   isSubscribed      Boolean  @default(false)
   allNotifications  Boolean  @default(false)
   dailyDigest       Boolean?
   weeklyDigest      Boolean?
   createdAt         DateTime @default(now())
 }
+
+
+// DB model next steps
+// model User {
+//   id                 String     @id @default(uuid())
+//   email              String     @unique
+//   name               String
+//   projects           Project[]
+//   notifications      Notification[]
+//   notificationSettings NotificationSettings?
+//   createdAt          DateTime   @default(now())
+//   updatedAt          DateTime   @updatedAt
+// }
+
+// model Project {
+//   id                String      @id @default(uuid())
+//   projectCode       String      @unique
+//   name              String
+//   description       String
+//   productLine       String
+//   owner             User        @relation(fields: [ownerId], references: [id])
+//   ownerId           String
+//   team              User[]
+//   notifications     Notification[]  
+//   createdAt         DateTime    @default(now())
+//   updatedAt         DateTime    @updatedAt
+// }
+
+// model Notification {
+//   id           String   @id @default(uuid())
+//   project      Project  @relation(fields: [projectId], references: [id])
+//   projectId    String
+//   user         User     @relation(fields: [userId], references: [id])
+//   userId       String
+//   message      String
+//   read         Boolean  @default(false)
+//   createdAt    DateTime @default(now())
+// }
+
+// model NotificationSettings {
+//   id             String  @id @default(uuid())
+//   user           User    @relation(fields: [userId], references: [id])
+//   userId         String  @unique
+//   allProjects    Boolean @default(false)
+//   dailyDigest    Boolean @default(false) 
+//   weeklyDigest   Boolean @default(false)
+//   updatedAt      DateTime @updatedAt
+// }

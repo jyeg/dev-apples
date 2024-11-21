@@ -24,22 +24,32 @@ export const notificationPreferencesSchema = z.object({
   weeklyDigest: booleanSchema.optional(),
 });
 
-export const addProjectFormSchema = z.object({
-  projectCode: z
-    .string({
-      required_error: 'Project code is required',
-    })
-    .min(7, 'Project code must be in the format AAA-123')
-    .regex(CODE_REGEX, 'Invalid project code format'),
-  projectDescription: z
-    .string({
-      required_error: 'Project description is required',
-    })
-    .min(1, 'Project description is required'),
-  productLine: z.nativeEnum(ProductLine, {
-    required_error: 'Product line is required',
-    invalid_type_error: 'Please select a valid product line',
-  }),
-  wantNotifications: booleanSchema,
-  notificationPreferences: notificationPreferencesSchema.optional(),
-});
+// would use a more robust sanitization library in a real app
+const sanitizeString = (value: string) => {
+  // trim whitespace and remove HTML tags
+  return value.trim().replace(/<[^>]*>/g, '');
+};
+
+export const addProjectFormSchema = z
+  .object({
+    id: z.string().readonly().optional(),
+    projectCode: z
+      .string({
+        required_error: 'Project code is required',
+      })
+      .min(7, 'Project code must be in the format AAA-123')
+      .regex(CODE_REGEX, 'Invalid project code format'),
+    projectDescription: z
+      .string({
+        required_error: 'Project description is required',
+      })
+      .min(1, 'Project description is required')
+      .transform(sanitizeString),
+    productLine: z.nativeEnum(ProductLine, {
+      required_error: 'Product line is required',
+      invalid_type_error: 'Please select a valid product line',
+    }),
+    wantNotifications: booleanSchema,
+    notificationPreferences: notificationPreferencesSchema.optional(),
+  })
+  .strict();

@@ -14,6 +14,7 @@ export function SuccessMessage({ projectCode }: SuccessMessageProps) {
         <Link
           href="https://www.apple.com/apple-music/"
           className="text-blue-600 hover:underline"
+          target="_blank"
         >
           Click here for 3 months of Apple Music free.
         </Link>
